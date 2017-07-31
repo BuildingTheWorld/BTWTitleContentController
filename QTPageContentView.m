@@ -60,11 +60,13 @@ static NSString * const CellID = @"cellid";
 
 - (instancetype)initWithFrame:(CGRect)frame childVcArray:(NSArray *)childVcArray parentViewController:(UIViewController *)parentController
 {
+    self.childVcArray = childVcArray;
+    self.parentVc = parentController;
+    
     if (self = [super initWithFrame:frame]){
-        self.childVcArray = childVcArray;
-        self.parentVc = parentController;
+        
+        [self setUpSubViews];
     }
-    [self setUpSubViews];
     
     return self;
 }

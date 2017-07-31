@@ -103,7 +103,7 @@
         
         // 点击 title 时, 调整 collectionView 偏移量
         
-        CGFloat offsetX = titleLabel.tag * weakSelf.pageContentView.pageCollectionView.frame.size.width;
+        CGFloat offsetX = titleLabel.tag * weakSelf.pageContentView.frame.size.width;
         
         [weakSelf.pageContentView.pageCollectionView setContentOffset:CGPointMake(offsetX, 0) animated:YES];
         
@@ -120,7 +120,6 @@
         [weakSelf.pageTitleView setTitleIndex:i];
         
     };
-    
     
 }
 
