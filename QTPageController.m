@@ -124,6 +124,17 @@
     
 }
 
+
+- (void)makeTitlePageWithIndex:(NSInteger)index
+{
+    CGFloat offsetX = index * self.pageContentView.frame.size.width;
+    
+    [self.pageContentView.pageCollectionView setContentOffset:CGPointMake(offsetX, 0) animated:NO];
+    
+    [self.pageTitleView setTitleIndex:index];
+}
+
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     

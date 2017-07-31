@@ -27,4 +27,8 @@
 
 @property (nonatomic, strong) NSArray <UIViewController *> *ControllerArray;
 
+/// 根据 index 控制 title 和 内容 View
+
+- (void)makeTitlePageWithIndex:(NSInteger)index;
+
 @end
