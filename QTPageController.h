@@ -7,6 +7,10 @@
 
 @property (nonatomic, assign) CGFloat titleHeight;
 
+/// 标题栏 字体
+
+@property (nonatomic, strong) UIFont *titleFont;
+
 /// 标题栏 文字 选中颜色
 
 @property (nonatomic, strong) UIColor *titleSelectColer;

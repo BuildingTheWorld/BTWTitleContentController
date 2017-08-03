@@ -34,7 +34,7 @@
         
         NSArray *titleArray = tempArray;
         
-        UIFont *titleFont = [UIFont systemFontOfSize:13];
+        UIFont *titleFont = self.titleFont;
         
         UIColor *titleSelectColor = self.titleSelectColer;
         
