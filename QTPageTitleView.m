@@ -77,65 +77,29 @@
     return self;
 }
 
+
+
+
+
 #pragma mark - setUpSubViews
 
 - (void)setUpSubViews
 {
     [self setupTitleLabels];
-    [self setupBottomLine];
+    
+//    [self setupBottomLine];
 }
 
 - (void)setupTitleLabels
 {
-    CGFloat labelW = self.frame.size.width / self.titleArray.count;
-    CGFloat labelH = self.frame.size.height - self.underlineHeight;
+    CGFloat labelW = self.bounds.size.width / self.titleArray.count;
+    CGFloat labelH = self.bounds.size.height - self.underlineHeight;
     
     self.labelH = labelH;
     
     CGFloat labelY = 0;
     
-    /*
-//    for (int i = 0; i < self.titleArray.count; i++)
-//    {
-//        UILabel *label = [[UILabel alloc] init];
-//        
-//        label.tag = i;
-//        CGFloat labelX = labelW * i;
-//        label.frame = CGRectMake(labelX, labelY, labelW, labelH);
-//        
-//        label.font = self.titleFont;
-//        label.text = self.titleArray[i];
-//        label.textAlignment = NSTextAlignmentCenter;
-//        label.userInteractionEnabled = YES;
-//        
-//        UITapGestureRecognizer *tapGes = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(titleLabelClick:)];
-//        [label addGestureRecognizer:tapGes];
-//        
-//        [self addSubview:label];
-//        [self.titleLabelArray addObject:label];
-//        
-//        if (i == 0)
-//        {
-//            self.oldIndex = 0;
-//            
-//            label.textColor = self.titleSelectColer;
-//            
-//            // 添加下划线
-//
-//            // 计算 title 的 text 的 width
-//            
-//            CGFloat labelTextWidth = [self getTextWidth:label];
-//            
-//            self.scrollLine.qt_width = labelTextWidth + 5;
-//            self.scrollLine.qt_height = self.underlineHeight;
-//            self.scrollLine.qt_centerX = label.qt_centerX;
-//            self.scrollLine.qt_y = self.qt_height - self.scrollLine.qt_height;
-//            
-//            [self addSubview:self.scrollLine];
-//            
-//        }
-//    }
-    */
+    
     
     [self.titleArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
        
@@ -144,6 +108,7 @@
         
         label.tag = idx;
         CGFloat labelX = labelW * idx;
+        
         label.frame = CGRectMake(labelX, labelY, labelW, labelH);
         
         label.font = self.titleFont;
@@ -175,9 +140,7 @@
             self.scrollLine.qt_y = self.qt_height - self.scrollLine.qt_height;
             
             [self addSubview:self.scrollLine];
-            
         }
-        
         
     }];
     

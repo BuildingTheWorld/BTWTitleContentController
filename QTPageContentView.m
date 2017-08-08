@@ -30,9 +30,11 @@ static NSString * const CellID = @"cellid";
 {
     if (_pageFlowLayout == nil) {
         _pageFlowLayout = [[UICollectionViewFlowLayout alloc] init];
-        _pageFlowLayout.itemSize = self.bounds.size;
+
+        
         _pageFlowLayout.minimumLineSpacing = 0;
         _pageFlowLayout.minimumInteritemSpacing = 0;
+        
         _pageFlowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
     }
     
@@ -44,12 +46,15 @@ static NSString * const CellID = @"cellid";
     if (_pageCollectionView == nil)
     {
         _pageCollectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:self.pageFlowLayout];
+        
         _pageCollectionView.dataSource = self;
         _pageCollectionView.delegate = self;
-        _pageCollectionView.scrollsToTop = NO;
+        
         _pageCollectionView.bounces = NO;
         _pageCollectionView.showsHorizontalScrollIndicator = NO;
         _pageCollectionView.pagingEnabled = YES;
+        _pageCollectionView.scrollsToTop = NO;
+        
         [_pageCollectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:CellID];
     }
     
@@ -58,35 +63,36 @@ static NSString * const CellID = @"cellid";
 
 #pragma mark - init
 
-- (instancetype)initWithFrame:(CGRect)frame childVcArray:(NSArray *)childVcArray parentViewController:(UIViewController *)parentController
+- (instancetype)initWithFrame:(CGRect)contentFrame childVcArray:(NSArray *)childVcArray parentViewController:(UIViewController *)parentController
 {
     self.childVcArray = childVcArray;
     self.parentVc = parentController;
     
-    if (self = [super initWithFrame:frame]){
+    if (self = [super initWithFrame:contentFrame]){
         
-        [self setUpSubViews];
+        // 将所有的子控制器添加父控制器中
+        
+        for (UIViewController *childVC in self.childVcArray)
+        {
+            [self.parentVc addChildViewController:childVC];
+        }
+        
+        // 添加 collectionView
+        
+        [self addSubview:self.pageCollectionView];
+        
+        [self.pageCollectionView makeConstraints:^(MASConstraintMaker *make) {
+            make.top.left.right.bottom.offset(0);
+        }];
+        
     }
     
     return self;
 }
 
-#pragma mark - setUpSubViews
-
-- (void)setUpSubViews
+- (void)layoutSubviews
 {
-    // 将所有的子控制器添加父控制器中
-    
-    for (UIViewController *childVC in self.childVcArray)
-    {
-        [self.parentVc addChildViewController:childVC];
-    }
-    
-    // 添加 collectionView
-    
-    [self addSubview:self.pageCollectionView];
-    
-    self.pageCollectionView.frame = self.bounds;
+    self.pageFlowLayout.itemSize = CGSizeMake(self.bounds.size.width, self.bounds.size.height);
 }
 
 #pragma mark - collectionView data source
@@ -100,13 +106,14 @@ static NSString * const CellID = @"cellid";
 {
     
     UICollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:CellID forIndexPath:indexPath];
+
+    cell.contentView.backgroundColor = [UIColor whiteColor];
     
-    for (UIView *view in cell.contentView.subviews)
-    {
-        [view removeFromSuperview];
-    }
+    
+    [cell.contentView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
     
     UIViewController *childVc = self.childVcArray[indexPath.item];
+    
     
     [cell.contentView addSubview:childVc.view];
     
@@ -119,6 +126,12 @@ static NSString * const CellID = @"cellid";
     
     return cell;
 }
+
+
+#pragma mark - collectionView delegate
+
+
+
 
 
 #pragma mark - scrollView delegate
