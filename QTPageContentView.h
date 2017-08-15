@@ -18,8 +18,8 @@ typedef void(^qtContentBlockType)(UIScrollView *scrollView);
 
 - (instancetype)initWithFrame:(CGRect)contentFrame childVcArray:(NSArray *)childVcArray parentViewController:(UIViewController *)parentController;
 
-/// 标题栏 高度
-
-@property (nonatomic, assign) CGFloat titleHeight;
+///// 标题栏 高度
+//
+//@property (nonatomic, assign) CGFloat titleHeight;
 
 @end

@@ -59,10 +59,9 @@
     {
         NSArray *childVcArray = self.ControllerArray;
         
-        _pageContentView.titleHeight = self.titleHeight;
+//        _pageContentView.titleHeight = self.titleHeight;
         
         _pageContentView = [[QTPageContentView alloc] initWithFrame:CGRectZero childVcArray:childVcArray parentViewController:self];
-        
         
         _pageContentView.backgroundColor = [UIColor lightGrayColor];
         
@@ -135,15 +134,15 @@
 }
 
 
-- (void)makeTitlePageWithIndex:(NSInteger)index // 如果 调用了 这个方法 设置 PageVC, 就会先懒加载两个控件, 但此时 得到的 self.view.bounds.size.height 是不准确的 (在 viewWillLayoutSubviews 中是准确的), 所以暂时将 pageContentView 的 初始化 方法 的 高度 设置为 SCREEN_HEIGHT - 64 - pageTitleHeight (原来为 self.view.bounds.size.height - self.titleHeight)
+- (void)makeTitlePageWithIndex:(NSInteger)index
 {
     [self.pageTitleView setTitleIndex:index];
     
+    CGFloat offsetX = index * self.view.bounds.size.width;
+
+    [self.pageContentView.pageCollectionView layoutIfNeeded];
     
-    CGFloat offsetX = index * self.pageContentView.frame.size.width;
-    
-    [self.pageContentView.pageCollectionView setContentOffset:CGPointMake(offsetX, 0) animated:YES];
-    
+    [self.pageContentView.pageCollectionView setContentOffset:CGPointMake(offsetX, 0) animated:NO];
 }
 
 
