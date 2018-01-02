@@ -33,8 +33,9 @@
         UIColor *titleUnSelectColor = self.titleUnSelectColor;
         CGFloat underlineHeight = self.underlineHeight;
         UIColor *underlineColor = self.underlineColor;
+        BOOL isShowBottomLine = self.isShowBottomLine;
         
-        _pageTitleView = [[QTPageTitleView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, titleHeight) titles:titleArray titleFont:titleFont titleSelectColor:titleSelectColor titleUnSelectColor:titleUnSelectColor underlineHeight:underlineHeight underlineColor:underlineColor];
+        _pageTitleView = [[QTPageTitleView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, titleHeight) titles:titleArray titleFont:titleFont titleSelectColor:titleSelectColor titleUnSelectColor:titleUnSelectColor underlineHeight:underlineHeight underlineColor:underlineColor isShowBottomLine:isShowBottomLine];
     }
     return _pageTitleView;
 }

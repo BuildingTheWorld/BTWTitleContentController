@@ -45,7 +45,7 @@
 
 #pragma mark - init
 
-- (instancetype)initWithFrame:(CGRect)frame titles:(NSArray *)titles titleFont:(UIFont *)titleFont titleSelectColor:(UIColor *)selectColor titleUnSelectColor:(UIColor *)unSelectColor underlineHeight:(CGFloat)underlineHeight underlineColor:(UIColor *)underlineColor {
+- (instancetype)initWithFrame:(CGRect)frame titles:(NSArray *)titles titleFont:(UIFont *)titleFont titleSelectColor:(UIColor *)selectColor titleUnSelectColor:(UIColor *)unSelectColor underlineHeight:(CGFloat)underlineHeight underlineColor:(UIColor *)underlineColor isShowBottomLine:(BOOL)isShowBottomLine {
     if (self = [super initWithFrame:frame]) {
         
         self.backgroundColor = [UIColor whiteColor];
@@ -57,18 +57,21 @@
         self.underlineColor = underlineColor;
         self.titleArray = titles;
         
-        [self setUpSubViews];
+        [self setUpSubViews:isShowBottomLine];
     }
     return self;
 }
 
 #pragma mark - setUpSubViews
 
-- (void)setUpSubViews
+- (void)setUpSubViews:(BOOL)isShowBottomLine
 {
     [self setupTitleLabels];
     
-    [self setupBottomLine];
+    if (isShowBottomLine == YES) {
+        
+        [self setupBottomLine];
+    }
 }
 
 - (void)setupTitleLabels

@@ -27,6 +27,9 @@
 
 @property (nonatomic, strong) UIColor *underlineColor;
 
+/// 是否显示底线
+
+@property (nonatomic, assign) BOOL isShowBottomLine;
 
 /// 控制器 数组
 
