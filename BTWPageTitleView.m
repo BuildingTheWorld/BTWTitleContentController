@@ -1,8 +1,6 @@
 
 #import "BTWPageTitleView.h"
 
-#import <Masonry.h>
-
 @interface BTWPageTitleView ()
 {
     NSArray *_titleArray;
