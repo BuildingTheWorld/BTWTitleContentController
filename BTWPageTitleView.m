@@ -3,6 +3,8 @@
 
 @interface BTWPageTitleView ()
 {
+    UIView *_bottomLine;
+    
     NSArray *_titleArray;
     
     UIFont *_titleSelectFont;
@@ -17,10 +19,10 @@
     
     CGFloat _labelH;
 
+    BOOL _showBottomLine;
     BOOL _syncUnderlineTitleWidth;
     
     NSInteger _oldIndex;
-    
 }
 
 @property (strong, nonatomic) NSMutableArray <UILabel *> *titleLabelArray;
@@ -45,8 +47,8 @@
     isSyncUnderlineTitleWidth:(BOOL)isSyncUnderlineTitleWidth {
     
     if (self = [super initWithFrame:frame]) {
-        
-        self.backgroundColor = [UIColor greenColor];
+
+        self.backgroundColor = [UIColor whiteColor];
         
         _titleArray = titles;
         
@@ -60,50 +62,65 @@
         _underlineHeight = underlineHeight;
         _underlineColor = underlineColor;
         
+        _showBottomLine = isShowBottomLine;
         _syncUnderlineTitleWidth = isSyncUnderlineTitleWidth;
         
-        [self setUpSubViews:isShowBottomLine];
+        [self setUpSubViews];
     }
     return self;
 }
 
-#pragma mark - override
+#pragma mark - layoutSubviews
 
 - (void)layoutSubviews {
     [super layoutSubviews];
     
+    [self layoutTitleLabels];
+    
+    if (_showBottomLine == YES) {
+     
+        [self layoutBottomLine];
+    }
+}
+
+- (void)layoutTitleLabels {
     CGFloat labelW = self.bounds.size.width / _titleArray.count;
     CGFloat labelH = self.bounds.size.height;
     _labelH = labelH;
     CGFloat labelY = 0;
     
     [self.titleLabelArray enumerateObjectsUsingBlock:^(UILabel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-       
+        
         CGFloat labelX = labelW * idx;
         obj.frame = CGRectMake(labelX, labelY, labelW, labelH);
     }];
-
+    
     UILabel *currectSelectLabel = self.titleLabelArray[_oldIndex];
-
+    
     if (_syncUnderlineTitleWidth == YES) {
         CGFloat labelTextWidth = [self getTextWidth:currectSelectLabel]; // 计算 title 的 text 的 width
         self.scrollLine.width = labelTextWidth + 5;
     } else {
         self.scrollLine.width = _underlineWidth;
     }
-
+    
     self.scrollLine.height = _underlineHeight;
     self.scrollLine.centerX = currectSelectLabel.centerX;
     self.scrollLine.top = labelH - _underlineHeight;
 }
 
+- (void)layoutBottomLine {
+    
+    _bottomLine.frame = CGRectMake(0, self.bounds.size.height - 0.4, self.bounds.size.width, 0.4);
+}
+
 #pragma mark - setUpSubViews
 
-- (void)setUpSubViews:(BOOL)isShowBottomLine
+- (void)setUpSubViews
 {
     [self setupTitleLabels];
     
-    if (isShowBottomLine == YES) {
+    if (_showBottomLine == YES) {
         
         [self setupBottomLine];
     }
@@ -144,9 +161,10 @@
 
 - (void)setupBottomLine // 是底线, 不是下划线
 {
-    UIView *bottomLine = [[UIView alloc] init];
-    bottomLine.frame = CGRectMake(0, self.frame.size.height - 0.4, self.bounds.size.width, 0.4);
-    [self addSubview:bottomLine];
+    _bottomLine = [[UIView alloc] init];
+    _bottomLine.backgroundColor = [UIColor colorWithRGB:0xE4E7EB];
+    
+    [self addSubview:_bottomLine];
 }
 
 #pragma mark - Action

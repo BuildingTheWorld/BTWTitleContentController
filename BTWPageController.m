@@ -129,7 +129,7 @@
         
         _pageContentView = [[BTWPageContentView alloc] initWithFrame:CGRectZero childVcArray:childVcArray parentViewController:self];
         
-        _pageContentView.backgroundColor = [UIColor blackColor];
+        _pageContentView.backgroundColor = [UIColor whiteColor];
     }
     return _pageContentView;
 }
