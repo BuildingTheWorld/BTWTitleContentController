@@ -43,5 +43,12 @@
  */
 - (void)changeTitleContentWithIndex:(NSInteger)index;
 
+/**
+ 重新设置 titleLabel 的 text
+ 
+ @param text text
+ @param index label 的 索引
+ */
+- (void)resetTitleLabelText:(NSString *)text index:(NSInteger)index;
 
 @end

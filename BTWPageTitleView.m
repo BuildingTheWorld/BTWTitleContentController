@@ -204,6 +204,20 @@
     [self makeTitleLabelChangeWithOldLabel:oldLabel NowLabel:nowLabel];
 }
 
+- (void)resetTitleText:(NSString *)titleText index:(NSInteger)index
+{
+    if ((titleText.length == 0) || (index >= _titleArray.count)) {
+        return;
+    }
+    
+    NSString *tempText = _titleArray[index];
+    tempText = titleText;
+    
+    UILabel *tempLabel = self.titleLabelArray[index];
+    tempLabel.text = titleText;
+    
+}
+
 #pragma mark - private
 
 // 改变 title 颜色 和 下划线 位置 宽度

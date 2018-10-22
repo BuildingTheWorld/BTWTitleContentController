@@ -56,6 +56,18 @@
     [self.pageContentView.pageCollectionView setContentOffset:CGPointMake(offsetX, 0) animated:NO];
 }
 
+- (void)resetTitleLabelText:(NSString *)text index:(NSInteger)index
+{
+    if ((text.length == 0) || (index >= self.controllerArray.count)) {
+        return;
+    }
+    
+    UIViewController *tempVC = self.controllerArray[index];
+    tempVC.title = text;
+    
+    [self.pageTitleView resetTitleText:text index:index];
+}
+
 #pragma mark - private
 
 - (void)controlUI

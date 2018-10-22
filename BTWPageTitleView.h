@@ -46,4 +46,12 @@ typedef void(^BTWTitleClickBlock)(NSInteger index);
  */
 - (void)selectTitleWithIndex:(NSInteger)index;
 
+/**
+ 重新设置 titleLabel 的 text
+ 
+ @param text text
+ @param index label 的 索引
+ */
+- (void)resetTitleText:(NSString *)titleText index:(NSInteger)index;
+
 @end
